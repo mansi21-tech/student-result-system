@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Shiksha University | Examination Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="university">
+
+        <div class="university-logo">
+
+            <div class="logo-shield">
+
+                <div class="logo-book">📖</div>
+
+                <div class="logo-star">★</div>
+
+            </div>
+
+        </div>
+
+        <div class="university-name">
+
+            <h1>SHIKSHA UNIVERSITY</h1>
+
+            <p>ज्ञानं परमं बलम्</p>
+
+            <span>STUDENT RESULT PORTAL</span>
+
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= RESULT PAGE ================= -->
+
+<main class="result-page">
+
+    <!-- UNIVERSITY HEADING -->
+
+    <div class="result-university">
+
+        <div class="result-logo">
+            SU
+        </div>
+
+        <div>
+
+            <h1>
+                SHIKSHA UNIVERSITY
+            </h1>
+
+            <p>
+                STUDENT RESULT MANAGEMENT SYSTEM
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="gold-line"></div>
+
+
+    <div class="result-title">
+
+        <span>
+            ACADEMIC YEAR 2026
+        </span>
+
+        <h2>
+            EXAMINATION RESULT
+        </h2>
+
+        <p>
+            Official Statement of Marks
+        </p>
+
+    </div>
+
+
+    <!-- STUDENT INFORMATION -->
+
+    <div class="student-information">
+
+        <div class="student-info">
+
+            <span>STUDENT NAME</span>
+
+            <strong>
+                {{ student["name"] }}
+            </strong>
+
+        </div>
+
+
+        <div class="student-info">
+
+            <span>ROLL NUMBER</span>
+
+            <strong>
+                {{ student["roll_no"] }}
+            </strong>
+
+        </div>
+
+
+        <div class="student-info">
+
+            <span>RESULT STATUS</span>
+
+            <strong class="status-text">
+                {{ student["result"] }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- MARKS TABLE -->
+
+    <div class="marks-container">
+
+        <table class="marks-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Sr. No.
+                    </th>
+
+                    <th>
+                        SUBJECT
+                    </th>
+
+                    <th>
+                        MAXIMUM MARKS
+                    </th>
+
+                    <th>
+                        MARKS OBTAINED
+                    </th>
+
+                    <th>
+                        STATUS
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr>
+
+                    <td>01</td>
+
+                    <td class="subject-name">
+                        Mathematics
+                    </td>
+
+                    <td>100</td>
+
+                    <td>
+                        {{ student["maths"] }}
+                    </td>
+
+                    <td>
+                        {% if student["maths"] >= 35 %}
+                            <span class="pass">PASS</span>
+                        {% else %}
+                            <span class="fail">FAIL</span>
+                        {% endif %}
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>02</td>
+
+                    <td class="subject-name">
+                        Science
+                    </td>
+
+                    <td>100</td>
+
+                    <td>
+                        {{ student["science"] }}
+                    </td>
+
+                    <td>
+                        {% if student["science"] >= 35 %}
+                            <span class="pass">PASS</span>
+                        {% else %}
+                            <span class="fail">FAIL</span>
+                        {% endif %}
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>03</td>
+
+                    <td class="subject-name">
+                        English
+                    </td>
+
+                    <td>100</td>
+
+                    <td>
+                        {{ student["english"] }}
+                    </td>
+
+                    <td>
+                        {% if student["english"] >= 35 %}
+                            <span class="pass">PASS</span>
+                        {% else %}
+                            <span class="fail">FAIL</span>
+                        {% endif %}
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>04</td>
+
+                    <td class="subject-name">
+                        Computer
+                    </td>
+
+                    <td>100</td>
+
+                    <td>
+                        {{ student["computer"] }}
+                    </td>
+
+                    <td>
+                        {% if student["computer"] >= 35 %}
+                            <span class="pass">PASS</span>
+                        {% else %}
+                            <span class="fail">FAIL</span>
+                        {% endif %}
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+
+            <tfoot>
+
+                <tr>
+
+                    <td colspan="2">
+                        TOTAL
+                    </td>
+
+                    <td>
+                        400
+                    </td>
+
+                    <td>
+                        {{ student["total"] }}
+                    </td>
+
+                    <td>
+                        —
+                    </td>
+
+                </tr>
+
+            </tfoot>
+
+        </table>
+
+    </div>
+
+
+    <!-- RESULT SUMMARY -->
+
+    <div class="result-summary">
+
+        <div class="summary-box">
+
+            <span>
+                TOTAL MARKS
+            </span>
+
+            <strong>
+                {{ student["total"] }} / 400
+            </strong>
+
+        </div>
+
+
+        <div class="summary-box">
+
+            <span>
+                PERCENTAGE
+            </span>
+
+            <strong>
+                {{ "%.2f"|format(student["percentage"]) }}%
+            </strong>
+
+        </div>
+
+
+        <div class="summary-box">
+
+            <span>
+                FINAL RESULT
+            </span>
+
+            <strong class="final-result">
+                {{ student["result"] }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <div class="official-message">
+
+        {% if student["result"] == "PASS" %}
+
+            <strong>Congratulations!</strong>
+
+            <p>
+                The student has successfully passed the examination.
+            </p>
+
+        {% else %}
+
+            <strong>Result Status</strong>
+
+            <p>
+                Please contact the examination department
+                for further information.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="result-actions">
+
+        <button
+            onclick="window.print()"
+            class="print-result"
+        >
+            🖨 Print Result
+        </button>
+
+
+        <a href="/" class="back-home">
+            ← Back to Portal
+        </a>
+
+    </div>
+
+
+    <p class="result-note">
+
+        This is a computer-generated result.
+        No signature is required.
+
+    </p>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-logo">
+
+        <div class="small-logo">
+            SU
+        </div>
+
+        <div>
+
+            <h3>
+                SHIKSHA UNIVERSITY
+            </h3>
+
+            <p>
+                Student Result Management System
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-line"></div>
+
+
+    <p class="copyright">
+        © 2026 Shiksha University. All Rights Reserved.
+    </p>
+
+</footer>
+
+</body>
+
+</html>
