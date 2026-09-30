@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shiksha University | Student Result Portal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6fa;
+            color: #222;
+        }
+
+        header {
+            background: #14213d;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: white;
+            color: #14213d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        header h1 {
+            margin-top: 12px;
+            font-size: 28px;
+        }
+
+        header p {
+            margin-top: 6px;
+            opacity: 0.9;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #14213d, #31558c);
+            color: white;
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 17px;
+        }
+
+        .search-box {
+            width: 90%;
+            max-width: 650px;
+            background: white;
+            margin: -35px auto 40px;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .search-box h3 {
+            text-align: center;
+            color: #14213d;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #14213d;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #31558c;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            color: #c62828;
+            font-weight: bold;
+        }
+
+        .result {
+            display: none;
+            width: 90%;
+            max-width: 850px;
+            margin: 30px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+        }
+
+        .result-header {
+            text-align: center;
+            border-bottom: 3px solid #14213d;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .result-header h2 {
+            color: #14213d;
+            margin-bottom: 8px;
+        }
+
+        .student-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .student-info div {
+            background: #f5f7fb;
+            padding: 14px;
+            border-radius: 7px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th {
+            background: #14213d;
+            color: white;
+            padding: 13px;
+        }
+
+        td {
+            padding: 13px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .summary {
+            margin-top: 25px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .summary div {
+            padding: 20px;
+            background: #f5f7fb;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .summary strong {
+            display: block;
+            font-size: 22px;
+            color: #14213d;
+            margin-top: 8px;
+        }
+
+        .pass {
+            color: green !important;
+        }
+
+        .fail {
+            color: red !important;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #14213d;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media(max-width: 600px) {
+            .hero h2 {
+                font-size: 27px;
+            }
+
+            .student-info,
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .result {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">SU</div>
+
+    <h1>SHIKSHA UNIVERSITY</h1>
+
+    <p>ज्ञानं परमं बलम्</p>
+
+    <p>STUDENT RESULT PORTAL</p>
+</header>
+
+
+<section class="hero">
+
+    <h2>Student Result Portal</h2>
+
+    <p>Check your academic performance using your roll number</p>
+
+</section>
+
+
+<div class="search-box">
+
+    <h3>🔎 Search Your Result</h3>
+
+    <input
+        type="text"
+        id="rollNumber"
+        placeholder="Enter your Roll Number"
+    >
+
+    <button onclick="searchResult()">
+        VIEW RESULT
+    </button>
+
+    <div id="message"></div>
+
+</div>
+
+
+<div class="result" id="resultBox">
+
+    <div class="result-header">
+
+        <h2>SHIKSHA UNIVERSITY</h2>
+
+        <p>STUDENT MARKSHEET</p>
+
+        <p>Academic Year: 2026</p>
+
+    </div>
+
+
+    <div class="student-info">
+
+        <div>
+            <strong>Roll Number:</strong>
+            <span id="studentRoll"></span>
+        </div>
+
+        <div>
+            <strong>Student Name:</strong>
+            <span id="studentName"></span>
+        </div>
+
+    </div>
+
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Sr. No.</th>
+                <th>Subject</th>
+                <th>Maximum Marks</th>
+                <th>Marks Obtained</th>
+                <th>Status</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="marksTable"></tbody>
+
+    </table>
+
+
+    <div class="summary">
+
+        <div>
+            Total Marks
+            <strong id="total"></strong>
+        </div>
+
+        <div>
+            Percentage
+            <strong id="percentage"></strong>
+        </div>
+
+        <div>
+            Result
+            <strong id="resultStatus"></strong>
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <p>© 2026 Shiksha University</p>
+
+    <p>Student Result Portal</p>
+
+</footer>
+
+
+<script>
+
+const students = {
+
+    "102": {
+        name: "Rahul Sharma",
+        maths: 82,
+        science: 76,
+        english: 88,
+        computer: 91
+    }
+
+};
+
+
+function searchResult() {
+
+    const roll = document
+        .getElementById("rollNumber")
+        .value
+        .trim();
+
+    const message =
+        document.getElementById("message");
+
+    const resultBox =
+        document.getElementById("resultBox");
+
+    message.innerHTML = "";
+
+    resultBox.style.display = "none";
+
+
+    if (roll === "") {
+
+        message.innerHTML =
+            "Please enter your roll number.";
+
+        return;
+
+    }
+
+
+    const student = students[roll];
+
+
+    if (!student) {
+
+        message.innerHTML =
+            "Student result not found.";
+
+        return;
+
+    }
+
+
+    const subjects = [
+
+        ["Maths", student.maths],
+        ["Science", student.science],
+        ["English", student.english],
+        ["Computer", student.computer]
+
+    ];
+
+
+    let total = 0;
+
+    let failed = false;
+
+    let tableHTML = "";
+
+
+    subjects.forEach((subject, index) => {
+
+        const marks = subject[1];
+
+        total += marks;
+
+        const status =
+            marks >= 35 ? "PASS" : "FAIL";
+
+        if (marks < 35) {
+            failed = true;
+        }
+
+
+        tableHTML += `
+
+            <tr>
+
+                <td>${index + 1}</td>
+
+                <td>${subject[0]}</td>
+
+                <td>100</td>
+
+                <td>${marks}</td>
+
+                <td class="${status === "PASS" ? "pass" : "fail"}">
+                    ${status}
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+
+    const percentage = total / subjects.length;
+
+    const finalResult = failed ? "FAIL" : "PASS";
+
+
+    document.getElementById("studentRoll")
+        .textContent = roll;
+
+    document.getElementById("studentName")
+        .textContent = student.name;
+
+    document.getElementById("marksTable")
+        .innerHTML = tableHTML;
+
+    document.getElementById("total")
+        .textContent = total + " / 400";
+
+    document.getElementById("percentage")
+        .textContent = percentage.toFixed(2) + "%";
+
+
+    const resultStatus =
+        document.getElementById("resultStatus");
+
+    resultStatus.textContent = finalResult;
+
+    resultStatus.className =
+        finalResult === "PASS"
+        ? "pass"
+        : "fail";
+
+
+    resultBox.style.display = "block";
+
+    resultBox.scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+</script>
+
+</body>
+</html>
